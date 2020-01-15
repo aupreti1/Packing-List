@@ -1,4 +1,38 @@
 <div class='container'>
     <div class='row'>
         <h1>Pack Your Bags!</h1>
+    </div>
+    <div>
+        <div class='row'>
+            {{#each item_data}}
+            {{#unless this.packed}}
+        </div>
+        <div>
+            <pre>{{this.id}}. {{this.item_name}}</pre>
+        </div>
+        <form method='POST' action='/items/update?_method=PUT'>
+            <input type='hidden' name='item_id' type='text' value={{this.id}}>
+            <button type='submit' class='submit-btn'>PACKED</button>
+            <button type='delete' class='delete-btn'>UNPACK</button>
+        </form>
+    </div>
+    {{/unless}}
+    {{/each}}
+</div>
+
+<div class='sec-col'>
+    {{#each item_data}}
+    {{#if this.packed}}
+    <input class='form-control' type='text' placeholder="{{this.id}}.{{this.item_name}}" readonly>
+    {{/if}}
+    {{/each}}
+</div>
+
+<p>Packed</p>
+<div class='container'>
+    <form action='/items/create' method='POST'>
+        <input type="text" name="item_name" class="form-control" value="" id="enter">
+        <button type="submit" id="submit-input">Submit</button>  
+        <button type='delete' class='delete-btn'>Delete</button>
+    </form>
 </div>
